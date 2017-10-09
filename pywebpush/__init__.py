@@ -293,6 +293,7 @@ def webpush(subscription_info,
             vapid_private_key=None,
             vapid_claims=None,
             content_encoding="aesgcm",
+            ttl=0,
             curl=False):
     """
         One call solution to endcode and send `data` to the endpoint
@@ -318,6 +319,7 @@ def webpush(subscription_info,
         No additional method call is required. Any non-success will throw a
         `WebPushException`.
 
+    :param ttl: Time To Live
     :param subscription_info: Provided by the client call
     :type subscription_info: dict
     :param data: Serialized data to send
@@ -352,6 +354,7 @@ def webpush(subscription_info,
     result = WebPusher(subscription_info).send(
         data,
         vapid_headers,
+        ttl=ttl,
         content_encoding=content_encoding,
         curl=curl,
     )
